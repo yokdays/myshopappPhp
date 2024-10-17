@@ -1,0 +1,17 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+body{
+    background-color: rgba(54, 47, 47, 0.048);
+}
+img{
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
