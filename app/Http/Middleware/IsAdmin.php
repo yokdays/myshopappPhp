@@ -14,8 +14,6 @@ class IsAdmin
         if (!Auth::check() || Auth::user()->type != 1) {
             return redirect('/home'); // Redirect if not an admin
         }
-
         return $next($request);
     }
 }
-?>

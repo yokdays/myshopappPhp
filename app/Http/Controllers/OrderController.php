@@ -22,14 +22,17 @@ class OrderController extends Controller
         if (!$order) {
             return view('orders.index')->with('message', 'ไม่มีคำสั่งซื้อในตระกร้า');
         }
+
         $this->updateOrderTotal($order);
         // ส่งคำสั่งซื้อไปยัง view
         return view('orders.index')->with('order', $order);
     }
+
     public function __construct()
     {
         $this->middleware('auth'); // ตรวจสอบว่า user ต้อง login
     }
+
     public function completed()
     {
         // ดึงรายการคำสั่งซื้อที่เสร็จสมบูรณ์ (status = 1) ของผู้ใช้ที่เข้าสู่ระบบ
@@ -66,7 +69,6 @@ class OrderController extends Controller
      */
     public function store($item)
     {
-
         // การจัดการคำสั่งซื้อ
         $order = Order::firstOrCreate(
             ['user_id' => Auth::id(), 'status' => 0],
@@ -75,6 +77,10 @@ class OrderController extends Controller
 
         $product = Product::find($item);
 
+        if ($product->stock <= 0) {
+            return redirect()->route('shops.index')->with('error', 'สินค้าหมด!');
+        }
+
         // ตรวจสอบสินค้าที่มีอยู่ในตะกร้า
         $orderDetail = OrderDetail::where('order_id', $order->id)
             ->where('product_id', $product->id)
@@ -82,8 +88,12 @@ class OrderController extends Controller
 
         if ($orderDetail) {
             // ถ้ามีอยู่แล้ว เพิ่มจำนวน
-            $orderDetail->amount += 1;
-            $orderDetail->save();
+            if ($orderDetail->amount < $product->stock) {
+                $orderDetail->amount += 1;
+                $orderDetail->save();
+            } else {
+                return redirect()->route('shops.index')->with('error', 'ไม่สามารถเพิ่มจำนวนสินค้าได้ เนื่องจากจำนวนสต็อกไม่เพียงพอ!');
+            }
         } else {
             // สร้างรายการใหม่ถ้าไม่มี
             $prepareCartDetail = [
@@ -91,16 +101,19 @@ class OrderController extends Controller
                 'product_id' => $product->id,
                 'product_name' => $product->name,
                 'amount' => 1,
-                'Price' => $product->Price // ตั้งค่า default เป็น 0 หาก price เป็น null
+                'Price' => $product->Price
             ];
 
-            // Call this method after updating items in the cart
             OrderDetail::create($prepareCartDetail);
         }
-        // คำนวณราคารวม
+
+        // ลดจำนวนสต็อกหลังจากเพิ่มสินค้าในตะกร้า
+        $product->stock -= 1;
+        $product->save();
 
         return redirect()->route('shops.index')->with('success', 'เพิ่มสินค้าลงในตระกร้าสำเร็จ!');
     }
+
 
 
     private function updateOrderTotal(Order $order)
@@ -114,44 +127,71 @@ class OrderController extends Controller
     }
     // เพิ่มฟังก์ชันเพื่อเพิ่มจำนวนสินค้า
     public function increaseQuantity($orderDetailId)
-    {
-        $orderDetail = OrderDetail::find($orderDetailId);
+{
+    $orderDetail = OrderDetail::find($orderDetailId);
 
-        if ($orderDetail) {
+    if ($orderDetail) {
+        $product = Product::find($orderDetail->product_id);
+
+        if ($product->stock > 0) {
             $orderDetail->amount += 1; // เพิ่มจำนวนสินค้า
+            $orderDetail->save(); // บันทึกการเปลี่ยนแปลง
+
+            // ลดจำนวนสต็อก
+            $product->stock -= 1;
+            $product->save();
+
+            // อัปเดตผลรวมราคาใหม่
+            $order = Order::find($orderDetail->order_id);
+            $this->updateOrderTotal($order); // เรียกใช้ฟังก์ชันเพื่ออัปเดตผลรวม
+
+            return redirect()->back()->with('success', 'เพิ่มจำนวนสินค้าสำเร็จ!');
+        } else {
+            return redirect()->back()->with('error', 'สินค้าหมด ไม่สามารถเพิ่มจำนวนได้');
+        }
+    }
+
+    return redirect()->back()->with('error', 'ไม่พบสินค้าที่ต้องการเพิ่มจำนวน');
+}
+
+public function decreaseQuantity($orderDetailId)
+{
+    $orderDetail = OrderDetail::find($orderDetailId);
+
+    if ($orderDetail) {
+        if ($orderDetail->amount > 1) {
+            $orderDetail->amount -= 1; // ลดจำนวนสินค้า
             $orderDetail->save(); // บันทึกการเปลี่ยนแปลง
 
             // คำนวณผลรวมราคาใหม่
             $order = Order::find($orderDetail->order_id);
             $this->updateOrderTotal($order); // เรียกใช้ฟังก์ชันเพื่ออัปเดตผลรวม
-            // Call this method after updating items in the cart
-            return redirect()->back()->with('success', 'เพิ่มจำนวนสินค้าสำเร็จ!');
-        }
 
-        return redirect()->back()->with('error', 'ไม่พบสินค้าที่ต้องการเพิ่มจำนวน');
+            // เพิ่มจำนวนสต็อกคืน
+            $product = Product::find($orderDetail->product_id);
+            $product->stock += 1;
+            $product->save();
+
+            return redirect()->back()->with('success', 'ลดจำนวนสินค้าสำเร็จ!');
+        } elseif ($orderDetail->amount == 1) {
+            // หากจำนวนสินค้าลดเหลือ 0 ให้ลบรายการจากตะกร้า
+            $product = Product::find($orderDetail->product_id);
+            $product->stock += 1; // เพิ่มจำนวนสต็อกคืน
+            $product->save();
+
+            $orderDetail->delete(); // ลบสินค้าออกจากตะกร้า
+
+            // อัปเดตผลรวมราคาใหม่
+            $order = Order::find($orderDetail->order_id);
+            $this->updateOrderTotal($order); // เรียกใช้ฟังก์ชันเพื่ออัปเดตผลรวม
+
+            return redirect()->back()->with('success', 'ลบสินค้าจากตะกร้าสำเร็จ!');
+        }
     }
 
-    public function decreaseQuantity($orderDetailId)
-    {
-        $orderDetail = OrderDetail::find($orderDetailId);
+    return redirect()->back()->with('error', 'ไม่พบสินค้าที่ต้องการลดจำนวน');
+}
 
-        if ($orderDetail) {
-            if ($orderDetail->amount > 1) {
-                $orderDetail->amount -= 1; // ลดจำนวนสินค้า
-                $orderDetail->save(); // บันทึกการเปลี่ยนแปลง
-
-                // คำนวณผลรวมราคาใหม่
-                $order = Order::find($orderDetail->order_id);
-                $this->updateOrderTotal($order); // เรียกใช้ฟังก์ชันเพื่ออัปเดตผลรวม
-                // Call this method after updating items in the cart
-                return redirect()->back()->with('success', 'ลดจำนวนสินค้าสำเร็จ!');
-            } else {
-                return redirect()->back()->with('error', 'ไม่สามารถลดจำนวนสินค้าได้');
-            }
-        }
-
-        return redirect()->back()->with('error', 'ไม่พบสินค้าที่ต้องการลดจำนวน');
-    }
 
     public function updateProductNames(Order $order)
     {
@@ -165,6 +205,8 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         //
+        $allOrders = Order::all();
+        return view('products.order', compact('allOrders'));
     }
 
     /**
