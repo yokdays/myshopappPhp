@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('status');
+            $table->text('product_names')->nullable();
             $table->decimal('total')->default(0);
             $table->timestamps();
         });

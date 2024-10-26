@@ -68,11 +68,6 @@ class OrderController extends Controller
     {
 
         // การจัดการคำสั่งซื้อ
-        $prepareCart = [
-            'status' => 0,
-            'user_id' => Auth::id()
-        ];
-
         $order = Order::firstOrCreate(
             ['user_id' => Auth::id(), 'status' => 0],
             ['status' => 0]
@@ -99,7 +94,7 @@ class OrderController extends Controller
                 'Price' => $product->Price // ตั้งค่า default เป็น 0 หาก price เป็น null
             ];
 
-
+            // Call this method after updating items in the cart
             OrderDetail::create($prepareCartDetail);
         }
         // คำนวณราคารวม
@@ -129,7 +124,7 @@ class OrderController extends Controller
             // คำนวณผลรวมราคาใหม่
             $order = Order::find($orderDetail->order_id);
             $this->updateOrderTotal($order); // เรียกใช้ฟังก์ชันเพื่ออัปเดตผลรวม
-
+            // Call this method after updating items in the cart
             return redirect()->back()->with('success', 'เพิ่มจำนวนสินค้าสำเร็จ!');
         }
 
@@ -148,7 +143,7 @@ class OrderController extends Controller
                 // คำนวณผลรวมราคาใหม่
                 $order = Order::find($orderDetail->order_id);
                 $this->updateOrderTotal($order); // เรียกใช้ฟังก์ชันเพื่ออัปเดตผลรวม
-
+                // Call this method after updating items in the cart
                 return redirect()->back()->with('success', 'ลดจำนวนสินค้าสำเร็จ!');
             } else {
                 return redirect()->back()->with('error', 'ไม่สามารถลดจำนวนสินค้าได้');
@@ -158,6 +153,11 @@ class OrderController extends Controller
         return redirect()->back()->with('error', 'ไม่พบสินค้าที่ต้องการลดจำนวน');
     }
 
+    public function updateProductNames(Order $order)
+    {
+        $productNames = $order->order_details->pluck('product_name')->implode(', ');
+        $order->update(['product_names' => $productNames]);
+    }
 
     /**
      * Display the specified resource.
@@ -180,14 +180,17 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
         if ($request->value === "checkout") {
             $order->update([
                 'status' => 1
             ]);
+
+            // เรียกใช้ฟังก์ชัน updateProductNames เพื่ออัปเดตชื่อสินค้า
+            $this->updateProductNames($order);
         }
         return redirect()->route('shops.index')->with('success', 'สั่งซื้อสินค้าสำเร็จ!');
     }
+
 
     /**
      * Remove the specified resource from storage.

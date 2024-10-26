@@ -13,6 +13,7 @@
                         <th>Total</th>
                         <th>Status</th>
                         <th>Date</th>
+                        <th>Product Names and Quantities</th> <!-- เพิ่มคอลัมน์สำหรับชื่อสินค้าและจำนวน -->
                     </tr>
                 </thead>
                 <tbody>
@@ -22,6 +23,11 @@
                             <td>{{ $order->total }}</td>
                             <td>Completed</td>
                             <td>{{ $order->updated_at }}</td>
+                            <td>
+                                @foreach ($order->order_details as $detail)
+                                    {{ $detail->product_name }} ({{ $detail->amount }})<br> <!-- แสดงชื่อสินค้าและจำนวน -->
+                                @endforeach
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
