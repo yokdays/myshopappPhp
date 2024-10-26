@@ -104,8 +104,7 @@ class OrderController extends Controller
         }
         // คำนวณราคารวม
 
-
-        return redirect()->route('shops.index');
+        return redirect()->route('shops.index')->with('success', 'เพิ่มสินค้าลงในตระกร้าสำเร็จ!');
     }
 
 

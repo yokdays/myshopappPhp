@@ -50,7 +50,7 @@ class ProductController extends Controller
         $product->image = $file;
         $product->save();
 
-        return redirect()->route('products.index')->with('success','Company has been created successfully');
+        return redirect()->route('products.index')->with('success','Product has been created successfully');
     }
 
     /**
