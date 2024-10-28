@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Meat Shop</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -18,7 +18,7 @@
             padding: 0;
         }
         .container{
-            background-color: rgba(255, 0, 0, 0.137);
+            background-color: rgba(156, 151, 151, 0.877);
             display: flex;
             place-content: center;
             place-items: center;
@@ -63,9 +63,11 @@
                         @endif --}}
     <body class="container">
 
+        <div>
+            <img src="{{ asset('storage\webimage\MEAT_WAY.png') }}" alt="" style="width: 400px">
+        </div>
         <div class="box">
-            <h1>WELCOME</h1>
-            <h2>Pop Toys</h2>
+            <h1>MEAT WAY</h1>
             <a href="{{ route('shops.index') }}"><button class="btn btn-success mt-4">Go to Shopping</button></a>
         </div>
     </body>

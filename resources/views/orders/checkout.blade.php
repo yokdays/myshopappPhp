@@ -3,7 +3,6 @@
 @section('content')
 <div class="container">
     <h1>Checkout</h1>
-    <h1>{{ $order->total }}</h1>
     <form action="{{ route('orders.processCheckout', $order->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
@@ -23,7 +22,13 @@
                 @enderror
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">ยืนยันการสั่งซื้อ</button>
+        <button type="submit" class="btn btn-primary mt-2">ยืนยันการสั่งซื้อ</button>
     </form>
+    <div class="d-block justify-content-center align-items-center text-center mt-4">
+        <h2>ราคารวมทั้งสิ้น {{ $order->total }} บาท</h2>
+        <div>
+            <img src="{{ asset('storage/webimage/qrcode.png') }}" alt="" style="width: 400px">
+        </div>
+    </div>
 </div>
 @endsection
