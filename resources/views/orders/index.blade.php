@@ -46,9 +46,8 @@
                         <td></td>
                         <td></td>
                         <td>
-                            <form action="{{ route('orders.update', $order->id) }}" method="POST">
+                            <form action="{{ route('orders.checkout', $order->id) }}" method="POST">
                                 @csrf
-                                @method('PUT')
                                 <input type="hidden" name="value" value="checkout">
                                 <button class="btn btn-outline-primary" type="submit">Checkout</button>
                             </form>

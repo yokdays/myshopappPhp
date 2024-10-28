@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('status');
             $table->text('product_names')->nullable();
             $table->decimal('total')->default(0);
+            $table->string('customer_name')->nullable();
+            $table->string('customer_address')->nullable();
+            $table->string('customer_bill')->nullable();
             $table->timestamps();
         });
     }

@@ -20,7 +20,7 @@
                     @foreach ($completedOrders as $order)
                         <tr>
                             <td>{{ $order->id }}</td>
-                            <td>Completed</td>
+                            <td>กำลังตรวจสอบ</td>
                             <td>
                                 @foreach ($order->order_details as $detail)
                                     {{ $detail->product_name }} ({{ $detail->amount }})<br> <!-- แสดงชื่อสินค้าและจำนวน -->

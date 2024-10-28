@@ -7,6 +7,7 @@ use App\Models\OrderDetail;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class OrderController extends Controller
 {
@@ -114,6 +115,40 @@ class OrderController extends Controller
         return redirect()->route('shops.index')->with('success', 'เพิ่มสินค้าลงในตระกร้าสำเร็จ!');
     }
 
+    public function checkout(Order $order)
+    {
+        return view('orders.checkout', compact('order'));
+    }
+
+    public function processCheckout(Request $request, $id)
+    {
+
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'image' => 'required|image',
+        ]);
+
+        $order = Order::findOrFail($id);
+        if ($request->hasFile('image')) {
+            // อัปโหลดรูปภาพไปยัง disk 'public' ภายใต้โฟลเดอร์ 'images'
+            $file = Storage::disk('public')->put('images/bills', $request->image);
+
+
+            // บันทึก path ของรูปภาพใหม่ในฐานข้อมูล
+            $order->customer_bill = $file;
+        }
+
+        $order->user_id = Auth::id();
+        $order->customer_name = $request->name;
+        $order->customer_address = $request->address;
+        $order->status = 1;
+        $order->save();
+
+
+        return redirect()->route('shops.index')->with('success', 'สั่งซื้อสินค้าสำเร็จ!');
+    }
+
 
 
     private function updateOrderTotal(Order $order)
@@ -127,70 +162,70 @@ class OrderController extends Controller
     }
     // เพิ่มฟังก์ชันเพื่อเพิ่มจำนวนสินค้า
     public function increaseQuantity($orderDetailId)
-{
-    $orderDetail = OrderDetail::find($orderDetailId);
+    {
+        $orderDetail = OrderDetail::find($orderDetailId);
 
-    if ($orderDetail) {
-        $product = Product::find($orderDetail->product_id);
+        if ($orderDetail) {
+            $product = Product::find($orderDetail->product_id);
 
-        if ($product->stock > 0) {
-            $orderDetail->amount += 1; // เพิ่มจำนวนสินค้า
-            $orderDetail->save(); // บันทึกการเปลี่ยนแปลง
+            if ($product->stock > 0) {
+                $orderDetail->amount += 1; // เพิ่มจำนวนสินค้า
+                $orderDetail->save(); // บันทึกการเปลี่ยนแปลง
 
-            // ลดจำนวนสต็อก
-            $product->stock -= 1;
-            $product->save();
+                // ลดจำนวนสต็อก
+                $product->stock -= 1;
+                $product->save();
 
-            // อัปเดตผลรวมราคาใหม่
-            $order = Order::find($orderDetail->order_id);
-            $this->updateOrderTotal($order); // เรียกใช้ฟังก์ชันเพื่ออัปเดตผลรวม
+                // อัปเดตผลรวมราคาใหม่
+                $order = Order::find($orderDetail->order_id);
+                $this->updateOrderTotal($order); // เรียกใช้ฟังก์ชันเพื่ออัปเดตผลรวม
 
-            return redirect()->back()->with('success', 'เพิ่มจำนวนสินค้าสำเร็จ!');
-        } else {
-            return redirect()->back()->with('error', 'สินค้าหมด ไม่สามารถเพิ่มจำนวนได้');
+                return redirect()->back()->with('success', 'เพิ่มจำนวนสินค้าสำเร็จ!');
+            } else {
+                return redirect()->back()->with('error', 'สินค้าหมด ไม่สามารถเพิ่มจำนวนได้');
+            }
         }
+
+        return redirect()->back()->with('error', 'ไม่พบสินค้าที่ต้องการเพิ่มจำนวน');
     }
 
-    return redirect()->back()->with('error', 'ไม่พบสินค้าที่ต้องการเพิ่มจำนวน');
-}
+    public function decreaseQuantity($orderDetailId)
+    {
+        $orderDetail = OrderDetail::find($orderDetailId);
 
-public function decreaseQuantity($orderDetailId)
-{
-    $orderDetail = OrderDetail::find($orderDetailId);
+        if ($orderDetail) {
+            if ($orderDetail->amount > 1) {
+                $orderDetail->amount -= 1; // ลดจำนวนสินค้า
+                $orderDetail->save(); // บันทึกการเปลี่ยนแปลง
 
-    if ($orderDetail) {
-        if ($orderDetail->amount > 1) {
-            $orderDetail->amount -= 1; // ลดจำนวนสินค้า
-            $orderDetail->save(); // บันทึกการเปลี่ยนแปลง
+                // คำนวณผลรวมราคาใหม่
+                $order = Order::find($orderDetail->order_id);
+                $this->updateOrderTotal($order); // เรียกใช้ฟังก์ชันเพื่ออัปเดตผลรวม
 
-            // คำนวณผลรวมราคาใหม่
-            $order = Order::find($orderDetail->order_id);
-            $this->updateOrderTotal($order); // เรียกใช้ฟังก์ชันเพื่ออัปเดตผลรวม
+                // เพิ่มจำนวนสต็อกคืน
+                $product = Product::find($orderDetail->product_id);
+                $product->stock += 1;
+                $product->save();
 
-            // เพิ่มจำนวนสต็อกคืน
-            $product = Product::find($orderDetail->product_id);
-            $product->stock += 1;
-            $product->save();
+                return redirect()->back()->with('success', 'ลดจำนวนสินค้าสำเร็จ!');
+            } elseif ($orderDetail->amount == 1) {
+                // หากจำนวนสินค้าลดเหลือ 0 ให้ลบรายการจากตะกร้า
+                $product = Product::find($orderDetail->product_id);
+                $product->stock += 1; // เพิ่มจำนวนสต็อกคืน
+                $product->save();
 
-            return redirect()->back()->with('success', 'ลดจำนวนสินค้าสำเร็จ!');
-        } elseif ($orderDetail->amount == 1) {
-            // หากจำนวนสินค้าลดเหลือ 0 ให้ลบรายการจากตะกร้า
-            $product = Product::find($orderDetail->product_id);
-            $product->stock += 1; // เพิ่มจำนวนสต็อกคืน
-            $product->save();
+                $orderDetail->delete(); // ลบสินค้าออกจากตะกร้า
 
-            $orderDetail->delete(); // ลบสินค้าออกจากตะกร้า
+                // อัปเดตผลรวมราคาใหม่
+                $order = Order::find($orderDetail->order_id);
+                $this->updateOrderTotal($order); // เรียกใช้ฟังก์ชันเพื่ออัปเดตผลรวม
 
-            // อัปเดตผลรวมราคาใหม่
-            $order = Order::find($orderDetail->order_id);
-            $this->updateOrderTotal($order); // เรียกใช้ฟังก์ชันเพื่ออัปเดตผลรวม
-
-            return redirect()->back()->with('success', 'ลบสินค้าจากตะกร้าสำเร็จ!');
+                return redirect()->back()->with('success', 'ลบสินค้าจากตะกร้าสำเร็จ!');
+            }
         }
-    }
 
-    return redirect()->back()->with('error', 'ไม่พบสินค้าที่ต้องการลดจำนวน');
-}
+        return redirect()->back()->with('error', 'ไม่พบสินค้าที่ต้องการลดจำนวน');
+    }
 
 
     public function updateProductNames(Order $order)

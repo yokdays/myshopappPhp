@@ -13,7 +13,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <strong>Image</strong>
-                            <input type="file" class="form-control" name="image">
+                            <input type="file" class="form-control" name="image" required>
                             @error('image')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Shop;
 use Illuminate\Http\Request;
@@ -15,8 +16,10 @@ class ShopController extends Controller
     {
         //
         $products = Product::all();
-        return view('shops.index')->with('products',$products);
+        return view('shops.index')->with('products', $products);
     }
+
+
 
     /**
      * Show the form for creating a new resource.

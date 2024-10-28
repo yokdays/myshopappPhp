@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\test;
 use App\Http\Controllers\CompanyCRUDController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -17,7 +16,6 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/test', [test::class, 'index']);
 
@@ -33,7 +31,12 @@ Route::post('/order-details/increase/{id}', [OrderController::class, 'increaseQu
 Route::post('/order-details/decrease/{id}', [OrderController::class, 'decreaseQuantity'])->name('order-details.decrease');
 Route::get('/completedOrders', [OrderController::class, 'completed'])->name('orders.completed');
 
-Route::group(['middleware' => ['auth', 'admin']], function () {
-    Route::resource('products', ProductController::class);
+Route::post('/orders/{order}/checkout', [OrderController::class, 'checkout'])->name('orders.checkout');
+Route::post('/orders/{order}/processCheckout', [OrderController::class, 'processCheckout'])->name('orders.processCheckout');
+
+Route::resource('products', ProductController::class);
     Route::get('/allOrders', [OrderController::class, 'show'])->name('products.order');
+Route::group(['middleware' => ['auth', 'admin']], function () {
+
 });
+
