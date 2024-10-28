@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <a href="{{ route('products.create') }}" class="btn btn-primary mb-2">เพิ่มสินค้านะจ๊ะ</a>
+                <a href="{{ route('products.create') }}" class="btn btn-primary mb-2">เพิ่มสินค้า</a>
             </div>
             @foreach ($products as $item)
             <div class="col-md-4 mb-4">
