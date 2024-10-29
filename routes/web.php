@@ -36,7 +36,6 @@ Route::post('/orders/{order}/processCheckout', [OrderController::class, 'process
 
 Route::resource('products', ProductController::class);
     Route::get('/allOrders', [OrderController::class, 'show'])->name('products.order');
-Route::group(['middleware' => ['auth', 'admin']], function () {
-
+    Route::group(['middleware' => ['auth', 'admin']], function () {
 });
 
