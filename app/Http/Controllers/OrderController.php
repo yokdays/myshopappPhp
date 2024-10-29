@@ -240,7 +240,7 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         //
-        $allOrders = Order::all();
+        $allOrders = Order::where('status', 1)->get();
         return view('products.order', compact('allOrders'));
     }
 
