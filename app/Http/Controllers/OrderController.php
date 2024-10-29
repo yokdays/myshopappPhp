@@ -88,21 +88,24 @@ class OrderController extends Controller
             ->first();
 
         if ($orderDetail) {
-            // ถ้ามีอยู่แล้ว เพิ่มจำนวน
-            if ($orderDetail->amount < $product->stock) {
-                $orderDetail->amount += 1;
-                $orderDetail->save();
+            // คำนวณจำนวนที่เพิ่ม
+            $newAmount = $orderDetail->amount + 1;
+
+            // เช็คว่าสินค้าจะเพิ่มได้ไหม
+            if ($product->stock > 0) {
+                $orderDetail->amount = $newAmount; // ปรับจำนวน
+                $orderDetail->save(); // บันทึกการเปลี่ยนแปลง
             } else {
                 return redirect()->route('shops.index')->with('error', 'ไม่สามารถเพิ่มจำนวนสินค้าได้ เนื่องจากจำนวนสต็อกไม่เพียงพอ!');
             }
         } else {
-            // สร้างรายการใหม่ถ้าไม่มี
+            // สร้างรายการใหม่ถ้าไม่มีในตะกร้า
             $prepareCartDetail = [
                 'order_id' => $order->id,
                 'product_id' => $product->id,
                 'product_name' => $product->name,
                 'amount' => 1,
-                'Price' => $product->Price
+                'price' => $product->price
             ];
 
             OrderDetail::create($prepareCartDetail);
