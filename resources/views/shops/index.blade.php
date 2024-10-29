@@ -12,7 +12,6 @@
             @foreach ($products as $item)
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
-                    <a href="">
                         <!-- เพิ่ม w-100 เพื่อให้รูปภาพเต็มความกว้างของ card -->
                         <img src="{{ asset('storage/'.$item->image) }}" alt="" class="card-img-top w-100" style="height: 300px; object-fit: cover;">
                         <div class="card-body">
@@ -20,7 +19,6 @@
                             <p class="card-text">Price: {{ $item->Price }}</p>
                             <p class="card-text">Stock: {{ $item->stock }}</p>
                         </div>
-                    </a>
                     <div class="card-footer">
                     <form action="{{ route('orders.store', $item->id) }}" method="POST">
                         @csrf
@@ -31,6 +29,11 @@
                 </div>
             </div>
             @endforeach
+            <div class="row">
+                <div class="col-12">
+                    {{ $products->links('pagination::bootstrap-5') }}
+                </div>
+            </div>
         </div>
     </div>
 @endsection

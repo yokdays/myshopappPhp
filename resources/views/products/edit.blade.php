@@ -38,6 +38,15 @@
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
+                        <strong>Stock</strong>
+                        <input type="number" name="stock" value="{{ $product->stock }}" class="form-control" placeholder="stock amount">
+                        @error('stock')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
                         <strong>Image</strong>
                         <input type="file" class="form-control" name="image">
                         <img src="{{ asset('storage/'.$product->image) }}" alt="" class="w-50">

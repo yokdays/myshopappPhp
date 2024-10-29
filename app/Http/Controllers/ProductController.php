@@ -16,7 +16,7 @@ class ProductController extends Controller
     public function index()
     {
         //
-        $products = Product::all();
+        $products = Product::paginate(6);
         return view('products.index')->with('products',$products);
         // return view('products.index',[
         //     'products' => $products,
@@ -42,10 +42,12 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'price' => 'required',
+            'stock' => 'required'
         ]);
         $product = new Product;
         $product->name = $request->name;
         $product->price = $request->price;
+        $product->stock = $request->stock;
         $product->user_id = Auth::id();
         $product->image = $file;
         $product->save();
@@ -79,7 +81,8 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'price' => 'required|numeric',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // ตรวจสอบไฟล์รูปภาพ
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'stock' => 'required'// ตรวจสอบไฟล์รูปภาพ
         ]);
 
         // ค้นหา Product ตาม ID
@@ -97,6 +100,7 @@ class ProductController extends Controller
         // อัปเดตข้อมูล product
         $product->name = $request->name;
         $product->price = $request->price;
+        $product->stock = $request->stock;
         $product->user_id = Auth::id();
 
         // บันทึกการอัปเดต

@@ -7,9 +7,11 @@
                 <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <label for="">ชื่อสินค้า</label>
-                    <input type="text" name="name" class="form-control">
+                    <input type="text" name="name" class="form-control" required>
                     <label for="">ราคา</label>
-                    <input type="number" name="price" class="form-control">
+                    <input type="number" name="price" class="form-control" required>
+                    <label for="">จำนวนสินค้าที่มี</label>
+                    <input type="number" name="stock" class="form-control" value="0">
                     <div class="col-md-12">
                         <div class="form-group">
                             <strong>Image</strong>
