@@ -105,7 +105,7 @@ class OrderController extends Controller
                 'product_id' => $product->id,
                 'product_name' => $product->name,
                 'amount' => 1,
-                'price' => $product->price
+                'price' => $product->Price
             ];
 
             OrderDetail::create($prepareCartDetail);
