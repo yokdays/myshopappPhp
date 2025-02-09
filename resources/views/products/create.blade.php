@@ -12,12 +12,15 @@
                     <input type="number" name="price" class="form-control" required>
                     <label for="">จำนวนสินค้าที่มี</label>
                     <input type="number" name="stock" class="form-control" value="0">
+                    <input type="radio" name="product_type" value="pig"> Pig
+                    <input type="radio" name="product_type" value="cow"> Cow
+                    <input type="radio" name="product_type" value="other" checked> Other
                     <div class="col-md-12">
                         <div class="form-group">
                             <strong>Image</strong>
                             <input type="file" class="form-control" name="image" required>
                             @error('image')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                                <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>

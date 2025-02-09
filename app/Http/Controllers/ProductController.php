@@ -51,6 +51,7 @@ class ProductController extends Controller
         $product->stock = $request->stock;
         $product->user_id = Auth::id();
         $product->image = $file;
+        $product->product_type = $request->product_type;
         $product->save();
 
         return redirect()->route('products.index')->with('success','Product has been created successfully');
