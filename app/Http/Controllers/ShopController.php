@@ -15,8 +15,8 @@ class ShopController extends Controller
     public function index()
     {
         //
-        $products = Product::paginate(6);
-        return view('shops.index')->with('products', $products);
+        $productsGrouped = Product::all()->groupBy('product_type');
+        return view('shops.index', compact('productsGrouped'));
     }
 
 
