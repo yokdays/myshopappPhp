@@ -146,7 +146,7 @@
                             <img src="https://lisergia.org/wp-content/uploads/2022/04/HappyFresh-How-To-Check-Freshness-Of-Meat-Beef.jpg"
                                 alt="" class="card-img-top w-100" style="height: 600px; object-fit: cover;">
                             <div class="card-body">
-                                Promotion
+                                เนื้อพ่อมึงอ่ะ
                             </div>
                         </div>
                     </div>
@@ -155,7 +155,7 @@
                             <img src="https://lisergia.org/wp-content/uploads/2022/04/HappyFresh-How-To-Check-Freshness-Of-Meat-Beef.jpg"
                                 alt="" class="card-img-top w-100" style="height: 300px; object-fit: cover;">
                             <div class="card-body">
-                                Promotion
+                                เนื้อหมา
                             </div>
                         </div>
                     </div>
@@ -164,7 +164,7 @@
                             <img src="https://lisergia.org/wp-content/uploads/2022/04/HappyFresh-How-To-Check-Freshness-Of-Meat-Beef.jpg"
                                 alt="" class="card-img-top w-100" style="height: 300px; object-fit: cover;">
                             <div class="card-body">
-                                Promotion
+                                เนื้อน้องพี
                             </div>
                         </div>
                     </div>
@@ -223,7 +223,7 @@
                         </div>
                     </div>
                     <div class="item10">
-                        <div class="card h-100">
+                        <div class="card">
                             <img src="https://lisergia.org/wp-content/uploads/2022/04/HappyFresh-How-To-Check-Freshness-Of-Meat-Beef.jpg"
                                 alt="" class="card-img-top w-100" style="height: 300px; object-fit: cover;">
                             <div class="card-body">
@@ -232,11 +232,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="item">
-
-                    </div>
-                </div>
             </div>
         </div>
+        <footer>
+            footerrrdsadsa
+        </footer>
 </body>

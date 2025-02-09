@@ -13,9 +13,10 @@
         @if ($order->order_details->isEmpty())
             <p>ไม่มีข้อมูลในตะกร้า</p>
         @else
-            <table class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered text-center align-middle">
                 <thead>
                     <tr>
+                        <th>รูปสินค้า</th>
                         <th>ชื่อสินค้า</th>
                         <th>ราคาเดี่ยว</th>
                         <th>จำนวน</th>
@@ -24,24 +25,27 @@
                 </thead>
                 <tbody>
                     @foreach ($order->order_details as $item)
+
                     <tr>
+                        <td style="width: 15%;"><img src="{{ asset('storage/' . $item->image) }}" alt="" style="width: 10rem"></td>
                         <td>{{ $item->product_name }}</td>
                         <td>฿{{ number_format($item->price, 2) }}</td>
                         <td>
-                            {{ $item->amount }}
                             <form action="{{ route('order-details.decrease', $item->id) }}" method="POST" style="display:inline;">
                                 @csrf
-                                <button type="submit" class="btn btn-warning btn-sm">-</button>
+                                <button type="submit" class="btn btn-sm">-</button>
                             </form>
+                            {{ $item->amount }}
                             <form action="{{ route('order-details.increase', $item->id) }}" method="POST" style="display:inline;">
                                 @csrf
-                                <button type="submit" class="btn btn-success btn-sm">+</button>
+                                <button type="submit" class="btn btn-sm">+</button>
                             </form>
                         </td>
                         <td>฿{{ number_format($item->price * $item->amount, 2) }}</td>
                     </tr>
                     @endforeach
                     <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -55,8 +59,10 @@
                     </tr>
                 </tbody>
             </table>
-            <h1>สรุปยอดรวม</h1>
-            <h2>฿{{ number_format($order->total, 2) }}</h2>
+            <div class="order-total">
+                <h1>สรุปยอดรวม</h1>
+                <h2>฿{{ number_format($order->total, 2) }}</h2>
+            </div>
         @endif
     @else
         <p>{{ $message ?? 'ไม่มีคำสั่งซื้อในตระกร้า' }}</p>

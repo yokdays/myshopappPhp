@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer("user_id");
             $table->string('image')->nullable();
             $table->integer('stock')->default(0);
+            $table->string('product_type');
             $table->timestamps();
         });
     }
