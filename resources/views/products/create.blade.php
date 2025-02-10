@@ -14,7 +14,13 @@
                     <input type="number" name="stock" class="form-control" value="0">
                     <input type="radio" name="product_type" value="pig"> Pig
                     <input type="radio" name="product_type" value="cow"> Cow
-                    <input type="radio" name="product_type" value="chicken" checked> Chicken
+                    <input type="radio" name="product_type" value="chicken"> Chicken
+                    <input type="radio" name="product_type" value="duck"> Duck
+                    <input type="radio" name="product_type" value="egg"> Egg
+                    <input type="radio" name="product_type" value="fish"> Fish
+                    <input type="radio" name="product_type" value="sheep"> Sheep
+                    <input type="radio" name="product_type" value="crocodile"> Crocodile
+                    <input type="radio" name="product_type" value="other" checked> Other
                     <div class="col-md-12">
                         <div class="form-group">
                             <strong>Image</strong>
