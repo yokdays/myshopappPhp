@@ -22,7 +22,7 @@
                             <div class="col-md-4 mb-4">
                                 <div class="card h-100">
                                     <!-- เพิ่ม w-100 เพื่อให้รูปภาพเต็มความกว้างของ card -->
-                                    <img src="{{ asset('storage/' . $item->image) }}" alt=""
+                                    <img src="{{ asset('storage/webimage/MEAT_WAY.png' . $item->image) }}" alt=""
                                         class="card-img-top w-100" style="height: 300px; object-fit: cover;">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $item->name }}</h5>
