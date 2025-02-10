@@ -26,8 +26,8 @@
             <div class="container">
 
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="https://www.sirinfarm.com/wp-content/uploads/2021/07/shutterstock_1021135813-scaled-1.jpg"
-                        alt="" style="width: 100px"> MEAT WAY
+                    <img src="{{ asset('storage/webimage/MEAT_WAY.png') }}"
+                        alt="" style="width: 70px"> MEAT WAY
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -143,10 +143,10 @@
                 <div class="category-list">
                     <div class="item1">
                         <div class="card h-100">
-                            <img src="https://lisergia.org/wp-content/uploads/2022/04/HappyFresh-How-To-Check-Freshness-Of-Meat-Beef.jpg"
+                            <img src="{{ asset('storage/images/AkV5KHX6Da46b9UT4FmKj5aQte9CB8ivWrM9eXsy.jpg') }}"
                                 alt="" class="card-img-top w-100" style="height: 600px; object-fit: cover;">
                             <div class="card-body">
-                                เนื้อพ่อมึงอ่ะ
+                                เนื้อสันใน (Tenderloin)
                             </div>
                         </div>
                     </div>
@@ -235,6 +235,6 @@
             </div>
         </div>
         <footer>
-            footerrrdsadsa
+            ez bro
         </footer>
 </body>
