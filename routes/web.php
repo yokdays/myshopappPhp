@@ -34,7 +34,7 @@ Route::get('/completedOrders', [OrderController::class, 'completed'])->name('ord
 Route::post('/orders/{order}/checkout', [OrderController::class, 'checkout'])->name('orders.checkout');
 Route::post('/orders/{order}/processCheckout', [OrderController::class, 'processCheckout'])->name('orders.processCheckout');
 
-
+Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('products', ProductController::class);
