@@ -9,7 +9,7 @@
                 <h4>3</h4>
                 <h4>4</h4>
                 <h4>5</h4>
-                <h4>6</h4>
+                <h4>6s</h4>
             </div>
             <div class="menu">
                 @if (session('success'))
