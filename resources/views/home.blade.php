@@ -111,16 +111,16 @@
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="https://www.sirinfarm.com/wp-content/uploads/2021/07/shutterstock_1021135813-scaled-1.jpg"
+                            <img src="{{ asset('storage/webimage/99.png') }}"
                                 class="d-block w-100 carousel-img" alt="...">
                             {{-- <img src="{{ asset('storage/webimage/item1.jpg') }}" class="d-block w-100 carousel-img" alt="..."> --}}
                         </div>
                         <div class="carousel-item">
-                            <img src="https://www.thailand.aussiebeefandlamb.com/contentassets/9f69e615043243818901991acb23d773/imagen49m7.png"
+                            <img src="{{ asset('storage/webimage/98.png') }}"
                                 class="d-block w-100 carousel-img" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="https://lisergia.org/wp-content/uploads/2022/04/HappyFresh-How-To-Check-Freshness-Of-Meat-Beef.jpg"
+                            <img src="{{ asset('storage/webimage/97.png') }}"
                                 class="d-block w-100 carousel-img" alt="...">
                         </div>
                     </div>
@@ -143,92 +143,89 @@
                 <div class="category-list">
                     <div class="item1">
                         <div class="card h-100">
-                            <img src="{{ asset('storage/images/AkV5KHX6Da46b9UT4FmKj5aQte9CB8ivWrM9eXsy.jpg') }}"
+                            <img src="{{ asset('storage/webimage/porkl.jpg') }}"
                                 alt="" class="card-img-top w-100" style="height: 600px; object-fit: cover;">
                             <div class="card-body">
-                                เนื้อสันใน (Tenderloin)
+                                เนื้อหมู (Pork)
                             </div>
                         </div>
                     </div>
                     <div class="item2">
                         <div class="card h-100">
-                            <img src="https://lisergia.org/wp-content/uploads/2022/04/HappyFresh-How-To-Check-Freshness-Of-Meat-Beef.jpg"
+                            <img src="{{ asset('storage/webimage/unnamed.jpg') }}"
                                 alt="" class="card-img-top w-100" style="height: 300px; object-fit: cover;">
                             <div class="card-body">
-                                เนื้อหมา
+                                เนื้อวัว
                             </div>
                         </div>
                     </div>
                     <div class="item3">
                         <div class="card h-100">
-                            <img src="https://lisergia.org/wp-content/uploads/2022/04/HappyFresh-How-To-Check-Freshness-Of-Meat-Beef.jpg"
+                            <img src="{{ asset('storage/webimage/22470333_s.jpg') }}"
                                 alt="" class="card-img-top w-100" style="height: 300px; object-fit: cover;">
                             <div class="card-body">
-                                เนื้อน้องพี
+                                เนื้อไก่
                             </div>
                         </div>
                     </div>
                     <div class="item4">
                         <div class="card h-100">
-                            <img src="https://lisergia.org/wp-content/uploads/2022/04/HappyFresh-How-To-Check-Freshness-Of-Meat-Beef.jpg"
+                            <img src="{{ asset('storage/webimage/egg.jpg') }}"
                                 alt="" class="card-img-top w-100" style="height: 300px; object-fit: cover;">
                             <div class="card-body">
-                                Promotion
+                                ไข่ไก่
                             </div>
                         </div>
                     </div>
                     <div class="item5">
                         <div class="card h-100">
-                            <img src="https://lisergia.org/wp-content/uploads/2022/04/HappyFresh-How-To-Check-Freshness-Of-Meat-Beef.jpg"
+                            <img src="{{ asset('storage/webimage/qb.jpg') }}"
                                 alt="" class="card-img-top w-100" style="height: 300px; object-fit: cover;">
                             <div class="card-body">
-                                Promotion
+                                เนื้อปลา
                             </div>
                         </div>
                     </div>
                     <div class="item6">
                         <div class="card h-100">
-                            <img src="https://lisergia.org/wp-content/uploads/2022/04/HappyFresh-How-To-Check-Freshness-Of-Meat-Beef.jpg"
+                            <img src="{{ asset('storage/webimage/rack-of-lamb.jpg') }}"
                                 alt="" class="card-img-top w-100" style="height: 300px; object-fit: cover;">
                             <div class="card-body">
-                                Promotion
+                                เนื้อแกะ
                             </div>
                         </div>
                     </div>
                     <div class="item7">
                         <div class="card h-100">
-                            <img src="https://lisergia.org/wp-content/uploads/2022/04/HappyFresh-How-To-Check-Freshness-Of-Meat-Beef.jpg"
+                            <img src="{{ asset('storage/webimage/Photo-for-Website-19-3.jpg') }}"
                                 alt="" class="card-img-top w-100" style="height: 300px; object-fit: cover;">
                             <div class="card-body">
-                                Promotion
+                                เนื้อเป็ด
                             </div>
                         </div>
                     </div>
                     <div class="item8">
                         <div class="card h-100">
-                            <img src="https://lisergia.org/wp-content/uploads/2022/04/HappyFresh-How-To-Check-Freshness-Of-Meat-Beef.jpg"
+                            <img src="{{ asset('storage/webimage/1642582643_38572_1.jpg') }}"
                                 alt="" class="card-img-top w-100" style="height: 300px; object-fit: cover;">
                             <div class="card-body">
-                                Promotion
+                                เนื้อจระเข้
                             </div>
                         </div>
                     </div>
                     <div class="item9">
                         <div class="card h-100">
-                            <img src="https://lisergia.org/wp-content/uploads/2022/04/HappyFresh-How-To-Check-Freshness-Of-Meat-Beef.jpg"
+                            <img src="{{ asset('storage/webimage/2323.png') }}"
                                 alt="" class="card-img-top w-100" style="height: 300px; object-fit: cover;">
-                            <div class="card-body">
-                                Promotion
+                            <div class="card-body"> 
+                                อื่น ๆ
                             </div>
                         </div>
                     </div>
                     <div class="item10">
                         <div class="card">
-                            <img src="https://lisergia.org/wp-content/uploads/2022/04/HappyFresh-How-To-Check-Freshness-Of-Meat-Beef.jpg"
+                            <img src="{{ asset('storage/webimage/12312.png') }}"
                                 alt="" class="card-img-top w-100" style="height: 300px; object-fit: cover;">
-                            <div class="card-body">
-                                Promotion
-                            </div>
                         </div>
                     </div>
                 </div>

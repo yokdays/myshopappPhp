@@ -4,12 +4,10 @@
     <div class="container">
         <div class="shop">
             <div class="menu-list">
-                <h4>1</h4>
-                <h4>2</h4>
-                <h4>3</h4>
-                <h4>4</h4>
-                <h4>5</h4>
-                <h4>6s</h4>
+                <h1 style="padding: 20px 0">Category</h1>
+                @foreach ($productsGrouped as $productType => $products)
+                            <h3 style="text-transform: capitalize; padding-bottom: 20px">{{ $productType }}</h3>
+                @endforeach
             </div>
             <div class="menu">
                 @if (session('success'))
@@ -25,7 +23,7 @@
                     </form>
                     @if (isset($productsGrouped) && $productsGrouped->isNotEmpty())
                         @foreach ($productsGrouped as $productType => $products)
-                            <h3>{{ $productType }}</h3>
+                            <h3 style="text-transform: capitalize">{{ $productType }}</h3>
                             @foreach ($products as $item)
                                 <div class="col-md-4 mb-4">
                                     <div class="card h-100">

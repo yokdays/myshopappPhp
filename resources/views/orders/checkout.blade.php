@@ -27,7 +27,7 @@
     <div class="d-block justify-content-center align-items-center text-center mt-4">
         <h2>ราคารวมทั้งสิ้น {{ $order->total }} บาท</h2>
         <div>
-            <img src="{{ asset('storage/webimage/qrcode.png') }}" alt="" style="width: 400px">
+            <img src="{{ asset('storage/webimage/app_icon.png') }}" alt="" style="width: 500px">
         </div>
     </div>
 </div>
