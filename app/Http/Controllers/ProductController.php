@@ -112,6 +112,18 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        // ค้นหาสินค้าตามชื่อหรือหมวดหมู่
+        $productsGrouped = Product::where('name', 'LIKE', "%{$query}%")
+            ->orWhere('product_type', 'LIKE', "%{$query}%")
+            ->get()
+            ->groupBy('product_type');
+
+        return view('shops.index', compact('productsGrouped'));
+    }
     /**
      * Remove the specified resource from storage.
      */
