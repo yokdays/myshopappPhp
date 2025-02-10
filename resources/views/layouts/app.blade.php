@@ -23,7 +23,7 @@
             <div class="container">
 
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="https://www.sirinfarm.com/wp-content/uploads/2021/07/shutterstock_1021135813-scaled-1.jpg" alt="" style="width: 100px"> MEAT WAY
+                    <img src="{{ asset('storage/webimage/MEAT_WAY.png') }}" alt="" style="width: 70px"> MEAT WAY
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
