@@ -35,6 +35,8 @@
                                 @case(4)
                                     <td>จัดส่งสำเร็จ</td>
                                 @break
+                                @default
+                                    <td>กำลังตรวจสอบ</td>
                             @endswitch
                             <td>
                                 @foreach ($order->order_details as $detail)

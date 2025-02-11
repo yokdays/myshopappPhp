@@ -3,6 +3,22 @@
 <button onclick="scrollToTop()" id="goToTopBtn" class="btn btn-danger rounded-circle shadow" title="กลับไปด้านบน">
     ^
 </button>
+<script>
+    // เมื่อ Scroll ลงให้แสดงปุ่ม
+    window.onscroll = function() {
+        let button = document.getElementById("goToTopBtn");
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            button.style.display = "block";
+        } else {
+            button.style.display = "none";
+        }
+    };
+
+    // เมื่อกดปุ่ม ให้เลื่อนขึ้นไปบนสุด
+    function scrollToTop() {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+</script>
 
 @section('content')
     <div class="container">
@@ -59,19 +75,3 @@
     </div>
 @endsection
 
-<script>
-    // เมื่อ Scroll ลงให้แสดงปุ่ม
-    window.onscroll = function() {
-        let button = document.getElementById("goToTopBtn");
-        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-            button.style.display = "block";
-        } else {
-            button.style.display = "none";
-        }
-    };
-
-    // เมื่อกดปุ่ม ให้เลื่อนขึ้นไปบนสุด
-    function scrollToTop() {
-        window.scrollTo({top: 0, behavior: 'smooth'});
-    }
-</script>

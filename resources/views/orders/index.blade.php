@@ -61,7 +61,7 @@
             </table>
             <div class="order-total">
                 <h1>สรุปยอดรวม</h1>
-                <h2>฿{{ number_format($order->total, 2) }}</h2>
+                <h2>฿ {{ number_format($order->total, 2) }}</h2>
             </div>
         @endif
     @else

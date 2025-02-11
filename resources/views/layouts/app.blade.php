@@ -66,10 +66,10 @@
                                     <a class="nav-link" href="{{ route('shops.index') }}">ร้านค้า</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('orders.index') }}">ตระกร้าสินค้า {{ $cartItemCount ?? 0 }}</a>
+                                    <a class="nav-link" href="{{ route('orders.index') }}">ตระกร้าสินค้า <span>{{ $cartItemCount ?? 0 }}</span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('orders.completed') }}" class="btn btn-primary">ดูคำสั่งซื้อที่สำเร็จ</a>
+                                    <a href="{{ route('orders.completed') }}" class="nav-link">ดูคำสั่งซื้อที่สำเร็จ</a>
                                 </li>
                             @endif
 

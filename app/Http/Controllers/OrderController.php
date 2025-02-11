@@ -27,6 +27,7 @@ class OrderController extends Controller
         $this->updateOrderTotal($order);
         // ส่งคำสั่งซื้อไปยัง view
         return view('orders.index')->with('order', $order);
+
     }
 
     public function __construct()
@@ -38,10 +39,9 @@ class OrderController extends Controller
     {
         // ดึงรายการคำสั่งซื้อที่เสร็จสมบูรณ์ (status = 1) ของผู้ใช้ที่เข้าสู่ระบบ
         $completedOrders = Order::where('user_id', Auth::id())->where('status', 1)->get();
-        $statuses = \App\Models\OrderStatus::all();
 
         // ส่งคำสั่งซื้อไปยัง view
-        return view('orders.completed', compact('completedOrders','statuses'));
+        return view('orders.completed', compact('completedOrders'));
     }
 
     public static function getCartItemCount()
@@ -165,6 +165,7 @@ class OrderController extends Controller
         // อัปเดตคำสั่งซื้อ
         $order->update(['total' => $total]);
     }
+
     // เพิ่มฟังก์ชันเพื่อเพิ่มจำนวนสินค้า
     public function increaseQuantity($orderDetailId)
     {
@@ -262,7 +263,10 @@ class OrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-
+    public function edit(Order $order)
+    {
+        //
+    }
 
     /**
      * Update the specified resource in storage.
