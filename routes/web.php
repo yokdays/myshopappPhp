@@ -25,6 +25,7 @@ Route::resource('orders', OrderController::class);
 
 // route order
 Route::resource('orders', OrderController::class);
+Route::put('/orders/{id}/status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
 Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 Route::post('/orders/{item}', [OrderController::class, 'store'])->name('orders.store');
 Route::post('/order-details/increase/{id}', [OrderController::class, 'increaseQuantity'])->name('order-details.increase');

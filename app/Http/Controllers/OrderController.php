@@ -38,9 +38,10 @@ class OrderController extends Controller
     {
         // ดึงรายการคำสั่งซื้อที่เสร็จสมบูรณ์ (status = 1) ของผู้ใช้ที่เข้าสู่ระบบ
         $completedOrders = Order::where('user_id', Auth::id())->where('status', 1)->get();
+        $statuses = \App\Models\OrderStatus::all();
 
         // ส่งคำสั่งซื้อไปยัง view
-        return view('orders.completed', compact('completedOrders'));
+        return view('orders.completed', compact('completedOrders','statuses'));
     }
 
     public static function getCartItemCount()
@@ -243,24 +244,32 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        $statuses = \App\Models\OrderStatus::all();
         $allOrders = Order::where('status', 1)->get();
-        return view('products.order', compact('allOrders'));
+
+        return view('products.order', compact('allOrders', 'order', 'statuses'));
     }
 
+
+    public function updateStatus(Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+        $order->status_id = $request->status_id;
+        $order->save();
+
+        return redirect()->back()->with('success', 'อัปเดตสถานะเรียบร้อยแล้ว!');
+    }
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Order $order)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Order $order)
     {
+
         if ($request->value === "checkout") {
             $order->update([
                 'status' => 1
@@ -271,6 +280,7 @@ class OrderController extends Controller
         }
         return redirect()->route('shops.index')->with('success', 'สั่งซื้อสินค้าสำเร็จ!');
     }
+
 
 
     /**
