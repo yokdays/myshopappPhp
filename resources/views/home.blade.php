@@ -78,7 +78,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('orders.completed') }}"
-                                        class="btn btn-primary">ดูคำสั่งซื้อที่สำเร็จ</a>
+                                        class="btn btn-primary">ดูคำสั่งซื้อ</a>
                                 </li>
                             @endif
 
