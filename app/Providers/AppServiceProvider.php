@@ -25,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
             $cartItemCount = OrderController::getCartItemCount();
             $view->with('cartItemCount', $cartItemCount);
         });
+        view()->composer('home', function ($view) {
+            $cartItemCount = OrderController::getCartItemCount();
+            $view->with('cartItemCount', $cartItemCount);
+        });
     }
 
 }

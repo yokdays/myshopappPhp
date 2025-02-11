@@ -9,6 +9,10 @@
 * {
     font-size: 1rem;
 }
+html {
+    scroll-padding-top: 3rem;
+}
+
 
 body {
     background-color: rgba(54, 47, 47, 0.048);
@@ -26,6 +30,11 @@ footer{
     background-color: brown;
     color: white;
     padding: 2rem 8rem 2rem 8rem;
+}
+
+a{
+    text-decoration: none;
+    color: black;
 }
 
 .home-border {
@@ -118,4 +127,24 @@ footer{
     margin-top: 2rem;
     display: grid;
     justify-content: flex-end;
+}
+
+#goToTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    z-index: 99;
+}
+
+.menu-list{
+    position: sticky;
+    top: 20px; /* ปรับให้เหมาะสม */
+    height: fit-content;
 }
