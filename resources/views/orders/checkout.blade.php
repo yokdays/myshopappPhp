@@ -2,7 +2,9 @@
 
 @section('content')
 <div class="container">
-    <h1>Checkout</h1>
+    <div class="row">
+        <div class="col pt-4">
+            <h1>ชำระเงิน</h1>
     <form action="{{ route('orders.processCheckout', $order->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
@@ -24,10 +26,14 @@
         </div>
         <button type="submit" class="btn btn-primary mt-2">ยืนยันการสั่งซื้อ</button>
     </form>
-    <div class="d-block justify-content-center align-items-center text-center mt-4">
-        <h2>ราคารวมทั้งสิ้น {{ $order->total }} บาท</h2>
-        <div>
-            <img src="{{ asset('storage/webimage/app_icon.png') }}" alt="" style="width: 500px">
+        </div>
+        <div class="col">
+                    <div class="d-block justify-content-center align-items-center text-center pt-4">
+                        <img src="{{ asset('storage/webimage/app_icon.png') }}" alt="" style="width: 20rem; padding-bottom:2rem;">
+                        <h2>ราคารวมทั้งสิ้น {{ $order->total }} บาท</h2>
+                        <div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

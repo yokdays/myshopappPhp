@@ -23,7 +23,7 @@
             <div class="container">
 
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('storage/webimage/MEAT_WAY.png') }}" alt="" style="width: 70px"> MEAT WAY
+                    <img src="{{ asset('storage/webimage/MEAT_WAY.png') }}" alt="" style="width: 70px"><span style="font-size:25px; padding-left: 1rem; font-weight: bold;">MEAT WAY</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -69,7 +69,7 @@
                                     <a class="nav-link" href="{{ route('orders.index') }}">ตระกร้าสินค้า <span>{{ $cartItemCount ?? 0 }}</span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('orders.completed') }}" class="nav-link">ดูคำสั่งซื้อที่สำเร็จ</a>
+                                    <a href="{{ route('orders.completed') }}" class="nav-link">ดูคำสั่งซื้อ</a>
                                 </li>
                             @endif
 

@@ -1,19 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <h1>Completed Orders</h1>
+    <div class="px-5">
+        <h1>คำสั่งซื้อ</h1>
         @if ($allOrders->isEmpty())
-            <p>No completed orders.</p>
+            <p>ไม่มีคำสั่งซื้อ</p>
         @else
-            <table class="table table-bordered">
+            <table class="table table-bordered text-center">
                 <thead>
                     <tr>
                         <th>รหัสคำสั่งซื้อ</th>
-                        <th>รหัสลูกค้า</th>
+                        <th>ชื่อลูกค้า</th>
+                        <th>ที่อยู่</th>
                         <th>สินค้า (จำนวน)</th> <!-- เพิ่มคอลัมน์สำหรับชื่อสินค้าและจำนวน -->
                         <th>ราคารวมทั้งสิ้น</th>
                         <th>วันที่อัพเดทล่าสุด</th>
+                        <th>ใบเสร็จ</th>
                         <th>สถานะ</th>
                     </tr>
                 </thead>
@@ -21,7 +23,8 @@
                     @foreach ($allOrders as $order)
                         <tr>
                             <td>{{ $order->id }}</td>
-                            <td>{{ $order->user_id }}</td>
+                            <td>{{ $order->customer_name }}</td>
+                            <td>{{ $order->customer_address }}</td>
                             <td>
                                 @foreach ($order->order_details as $detail)
                                     {{ $detail->product_name }} ({{ $detail->amount }})<br> <!-- แสดงชื่อสินค้าและจำนวน -->
@@ -29,6 +32,7 @@
                             </td>
                             <td>{{ $order->total }}</td>
                             <td>{{ $order->updated_at }}</td>
+                            <td><img src="{{ asset('storage/' . $order->customer_bill) }}" alt="" style="width: 10rem; height: 15rem;"></td>
                             <td>
                                 <form action="{{ route('orders.updateStatus', $order->id) }}" method="POST">
                                     @csrf

@@ -5,6 +5,12 @@
         <div class="row">
             <div class="col-12">
                 <a href="{{ route('products.create') }}" class="btn btn-primary mb-2">เพิ่มสินค้า</a>
+                <div class="row my-3">
+                    <form action="{{ route('products.index') }}" method="GET" class="d-flex">
+                    <input class="form-control w-100" type="text" name="search" placeholder="ค้นหา">
+                    <button type="submit" class="btn btn-info col-2" style="margin-left: 1rem">ค้นหา</button>
+                    </form>
+                </div>
             </div>
             @foreach ($products as $item)
             <div class="col-md-4 mb-4">
@@ -34,4 +40,9 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            console.log(123);
+        });
+    </script>
 @endsection

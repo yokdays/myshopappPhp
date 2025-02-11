@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="container">
-        <h1>Completed Orders</h1>
+        <h1>คำสั่งซื้อ</h1>
         @if ($completedOrders->isEmpty())
-            <p>No completed orders.</p>
+            <p>ไม่มีคำสั่งซื้อ</p>
         @else
-            <table class="table table-bordered">
+            <table class="table table-bordered text-center">
                 <thead>
                     <tr>
                         <th>รหัสคำสั่งซื้อ</th>
