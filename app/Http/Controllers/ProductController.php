@@ -15,8 +15,12 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        //
-        $products = Product::paginate(6);
+        $search = $request->search;
+        if ($search != '') {
+            $products = Product::where('name', 'like', '%' . $search . '%')->orWhere('price', 'like', '%' . $search . '%')->paginate(9);
+        } else {
+            $products = Product::paginate(9);
+        }
         return view('products.index')->with('products',$products);
 
         // return view('products.index',[

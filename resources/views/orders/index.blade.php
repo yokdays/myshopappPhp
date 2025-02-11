@@ -53,7 +53,7 @@
                             <form action="{{ route('orders.checkout', $order->id) }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="value" value="checkout">
-                                <button class="btn btn-outline-primary" type="submit">Checkout</button>
+                                <button class="btn btn-outline-primary" type="submit">ยืนยันคำสั่งซื้อ</button>
                             </form>
                         </td>
                     </tr>
