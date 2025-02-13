@@ -1,10 +1,94 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🛒 Laravel E-Commerce Project
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 📌 รายละเอียดโปรเจค
+
+โปรเจคนี้เป็นระบบร้านค้าออนไลน์พัฒนาโดยใช้ **Laravel** ซึ่งมีฟีเจอร์ต่างๆ เช่น:
+
+- จัดการสินค้า
+- ค้นหาสินค้าโดยใช้ `Bootstrap 5`
+- ระบบตะกร้าสินค้า
+- อัปเดตสถานะคำสั่งซื้อแบบเรียลไทม์ด้วย `AJAX`
+
+---
+
+## 🔧 การติดตั้ง
+
+### 1️⃣ **โคลนโปรเจค**
+
+```sh
+git clone https://github.com/your-repository.git
+cd your-repository
+```
+
+### 2️⃣ **ติดตั้ง Dependencies**
+
+```sh
+composer install
+npm install
+```
+
+### 3️⃣ \*\*ตั้งค่าไฟล์ \*\*\`\`
+
+```sh
+cp .env.example .env
+php artisan key:generate
+```
+
+จากนั้นแก้ไขค่า **DATABASE** และการตั้งค่าอื่นๆ
+
+### 4️⃣ **รัน Migration และ Seeder**
+
+```sh
+php artisan migrate --seed
+```
+
+### 5️⃣ **รันเซิร์ฟเวอร์**
+
+```sh
+npm run dev
+php artisan serve
+```
+
+---
+
+## 🚀 ฟีเจอร์หลัก
+
+### 🏬 ระบบสินค้า
+
+- เพิ่ม/แก้ไข/ลบสินค้า
+- แสดงสินค้าตามหมวดหมู่
+- ระบบค้นหาสินค้าด้วย `Bootstrap 5`
+
+### 🛍️ ตะกร้าสินค้า
+
+- เพิ่ม/ลบสินค้าในตะกร้า
+- คำนวณราคาสินค้าอัตโนมัติ
+
+### 📦 ระบบคำสั่งซื้อ
+
+- อัปเดตสถานะออเดอร์แบบเรียลไทม์
+- ใช้ `AJAX + jQuery` เพื่ออัปเดตสถานะทันที
+
+---
+
+## 🛠 เทคโนโลยีที่ใช้
+
+- **Laravel 10** (Backend)
+- **Bootstrap 5** (Frontend)
+- **AJAX + jQuery** (Real-time Update)
+- **MySQL** (Database)
+
+---
+
+## 📄 License
+
+โปรเจคนี้อยู่ภายใต้ **MIT License**
+
+---
+
+## 👨‍💻 ผู้พัฒนา
+
+- [Your Name](https://github.com/your-github)
+
 
 
