@@ -60,7 +60,7 @@
                 </tbody>
             </table>
             <div class="order-total">
-                <h1>สรุปยอดรวม</h1>
+                <h1>ราคารวมทั้งสิ้น</h1>
                 <h2>฿ {{ number_format($order->total, 2) }}</h2>
             </div>
         @endif
