@@ -17,8 +17,8 @@
 ### 1️⃣ **โคลนโปรเจค**
 
 ```sh
-git clone https://github.com/your-repository.git
-cd your-repository
+git clone https://github.com/yokdays/myshopappPhp.git
+cd myshopappPhp
 ```
 
 ### 2️⃣ **ติดตั้ง Dependencies**
