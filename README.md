@@ -37,10 +37,11 @@ php artisan key:generate
 
 จากนั้นแก้ไขค่า **DATABASE** และการตั้งค่าอื่นๆ
 
-### 4️⃣ **รัน Migration และ Seeder**
+### 4️⃣ **รัน Migration Seeder และ storage:link**
 
 ```sh
 php artisan migrate --seed
+php artisan storage:link
 ```
 
 ### 5️⃣ **รันเซิร์ฟเวอร์**
